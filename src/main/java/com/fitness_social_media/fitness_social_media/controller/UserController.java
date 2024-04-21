@@ -1,8 +1,9 @@
 package com.fitness_social_media.fitness_social_media.controller;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.List;
 
+// import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    // Create a new user
     @PostMapping("/users")
     public User createUser(@RequestBody User user){
         User newUser=new User();
@@ -34,39 +36,55 @@ public class UserController {
         return savedUser;
     }
 
+    // Get all users
     @GetMapping("/users")
     public List<User> getUsers() {
-        List<User> users = new ArrayList<>();
-        User user1 = new User(1,"John", "Doe", "johndoe@gmail.com","JohnDeo");
-        User user2 = new User(2,"Dilanka", "Prasad", "dpl@gmail.com","Dilanka");
-        users.add(user1);
-        users.add(user2);
+        List<User> users = userRepository.findAll();        
         return users;
     }
+
+    // Get a specific user by id
     @GetMapping("/users/{userId}")
-    public User getUserById(@PathVariable ("userId") Integer id) {        
-        User user1 = new User(1,"John", "Doe", "johndoe@gmail.com","JohnDeo");
-        user1.setId(id);
-        return user1;
+    public User getUserById(@PathVariable ("userId") Integer id) throws Exception {        
+        java.util.Optional<User> user=userRepository.findById(id);  
+        if(user.isPresent()){
+            return user.get();
+        }
+        throw new Exception("user not exist with user id " + id);
     }
     
-    @PutMapping("/users")
-    public User updateUser(@RequestBody User user){
-        User user1 = new User(1,"John", "Doe", "johndoe@gmail.com","JohnDeo");
-        if(user.getFirstName()!=null){
-            user1.setFirstName(user.getFirstName());
-        }
-        if(user.getLastName()!=null){
-            user1.setLastName(user.getLastName());
-        }
-        if(user.getEmail()!=null){
-            user1.setEmail(user.getEmail());
-        }
+    // Update an existing user by Id
+    @PutMapping("/users/{userId}")
+    public User updateUser(@RequestBody User user, @PathVariable ("userId") Integer id) throws Exception{
+       java.util.Optional<User> user1 = userRepository.findById(id);
+       if(user1.isEmpty()){
+        throw new Exception("user not exised with id " + id);
+       }
+       User oldUser=user1.get();
+
+       if(user.getFirstName()!=null){
+        oldUser.setFirstName(user.getFirstName());
+       }
        
-        return user1;
+       if(user.getLastName()!=null){
+        oldUser.setLastName(user.getLastName());
+       }
+       
+       if(user.getEmail()!=null){
+        oldUser.setEmail(user.getEmail());
+       }
+
+       User updateUser=userRepository.save(oldUser);
+
+       return updateUser;
     }
     @DeleteMapping("/users/{userId}")
-    public String deleteUser(@PathVariable("userId") Integer id){
+    public String deleteUser(@PathVariable("userId") Integer id) throws Exception{
+        java.util.Optional<User> user = userRepository.findById(id);
+        if(user.isEmpty()){
+            throw new Exception("user not exised with id " + id);
+        }
+        userRepository.delete(user.get());
         return "User deleted successfully with id no "+id;
     }
 
