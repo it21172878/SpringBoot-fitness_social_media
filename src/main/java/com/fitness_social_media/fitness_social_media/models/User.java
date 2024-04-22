@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,6 +13,7 @@ import jakarta.persistence.Table;
 @Table(name="users")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String firstName;
     private String lastName;
@@ -19,6 +22,7 @@ public class User {
     private String gender;
     private List<Integer> followers=new ArrayList<>();
     private List<Integer> followings=new ArrayList<>();
+    private List<Post> savedPost=new ArrayList<>();
 
     // generate constructors
     
@@ -28,8 +32,10 @@ public class User {
     }
     
     
+    
+
     public User(Integer id, String firstName, String lastName, String email, String password, String gender,
-            List<Integer> followers, List<Integer> followings) {
+            List<Integer> followers, List<Integer> followings, List<Post> savedPost) {
                 super();
         this.id = id;
         this.firstName = firstName;
@@ -39,7 +45,11 @@ public class User {
         this.gender = gender;
         this.followers = followers;
         this.followings = followings;
+        this.savedPost = savedPost;
     }
+
+
+
 
     public Integer getId() {
         return id;
@@ -104,6 +114,17 @@ public class User {
         this.followings = followings;
     }
 
+
+    public List<Post> getSavedPost() {
+        return savedPost;
+    }
+
+
+    public void setSavedPost(List<Post> savedPost) {
+        this.savedPost = savedPost;
+    }
+
+    
     
 
     
