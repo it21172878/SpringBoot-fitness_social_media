@@ -1,5 +1,6 @@
 package com.fitness_social_media.fitness_social_media.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,11 +31,11 @@ public class PostServiceImplementation implements PostService{
         
         newPost.setCaption(post.getCaption());
         newPost.setImage(post.getImage());
-        // newPost.setCreatedAt(new LocalDateTime.now());
+        newPost.setCreatedAt(LocalDateTime.now());
         newPost.setVideo(post.getVideo());
         newPost.setUser(user);
 
-        return newPost;
+        return postRepository.save(newPost);
     }
 
     @Override
