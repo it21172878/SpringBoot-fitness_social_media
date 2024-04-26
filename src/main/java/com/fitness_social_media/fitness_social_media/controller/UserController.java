@@ -28,11 +28,11 @@ public class UserController {
     UserService userService;
 
     // Create a new user
-    @PostMapping("/users")
-    public User createUser(@RequestBody User user){
-        User savedUser=userService.registerUser(user);
-        return savedUser;
-    }
+    // @PostMapping("/users")
+    // public User createUser(@RequestBody User user){
+    //     User savedUser=userService.registerUser(user);
+    //     return savedUser;
+    // }
 
     // Get all users
     @GetMapping("/api/users")
