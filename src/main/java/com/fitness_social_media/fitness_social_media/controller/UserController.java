@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,15 +50,19 @@ public class UserController {
     }
     
     // Update an existing user by Id
-    @PutMapping("/api/users/{userId}")
-    public User updateUser(@RequestBody User user, @PathVariable ("userId") Integer id) throws Exception{
-       User updatedUser=userService.updateUser(user, id);
+    @PutMapping("/api/users")
+    public User updateUser(@RequestHeader ("Authorization") String jwt,@RequestBody User user) throws Exception{
+       
+       User reqUser=userService.findUserByJwt(jwt);
+       User updatedUser=userService.updateUser(user, reqUser.getId());
        return updatedUser;
     }
 
-    @PutMapping("/api/users/follow/{userId1}/{userId2}")
-    public User followUserHandler(@PathVariable Integer userId1,@PathVariable Integer userId2) throws Exception{
-        User user=userService.followUser(userId1, userId2);
+    @PutMapping("/api/users/follow/{userId2}")
+    public User followUserHandler(@RequestHeader ("Authorization") String jwt,@PathVariable Integer userId2) throws Exception{
+        
+        User reqUserId=userService.findUserByJwt(jwt);
+        User user=userService.followUser(reqUserId.getId(), userId2);
         return user;
     }
 
@@ -65,6 +70,13 @@ public class UserController {
     public List<User> searchUser(@RequestParam("query") String query){
         List<User> users=userService.searchUser(query);
         return users;
+    }
+
+    @GetMapping("/api/users/profile")
+    public User getUserFromToken(@RequestHeader ("Authorization") String jwt) {
+        User user=userService.findUserByJwt(jwt);
+        user.setPassword(null);
+        return user;
     }
 
     // Delete a user by Id
