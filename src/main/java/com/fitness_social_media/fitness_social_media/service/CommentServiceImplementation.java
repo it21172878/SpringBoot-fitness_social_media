@@ -1,9 +1,10 @@
 package com.fitness_social_media.fitness_social_media.service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.PortResolver;
+import org.springframework.stereotype.Service;
 
 import com.fitness_social_media.fitness_social_media.models.Comment;
 import com.fitness_social_media.fitness_social_media.models.Post;
@@ -11,6 +12,7 @@ import com.fitness_social_media.fitness_social_media.models.User;
 import com.fitness_social_media.fitness_social_media.repository.CommentRepository;
 import com.fitness_social_media.fitness_social_media.repository.PostRepository;
 
+@Service
 public class CommentServiceImplementation implements CommentService{
 
     @Autowired
@@ -39,13 +41,27 @@ public class CommentServiceImplementation implements CommentService{
     }
 
     @Override
-    public Comment findCommentById(Integer commentId) {
-        return null;
+    public Comment findCommentById(Integer commentId) throws Exception {
+
+        Optional<Comment> opt=commentRepository.findById(commentId);
+        if(opt.isEmpty()){
+            throw new Exception("comment not exist");
+        }
+        return opt.get();
     }
 
     @Override
-    public Comment likeComment(Integer commentId, Integer userId) {
-        return null;
+    public Comment likeComment(Integer commentId, Integer userId) throws Exception {
+
+        Comment comment=findCommentById(commentId);
+        User user=userService.findUserById(userId);
+
+        if(!comment.getLiked().contains(user)){
+            comment.getLiked().add(user);
+        }else{
+            comment.getLiked().remove(user);
+        }
+        return commentRepository.save(comment);
 
     }
 
