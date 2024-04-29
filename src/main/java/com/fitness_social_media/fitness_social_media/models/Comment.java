@@ -24,7 +24,7 @@ public class Comment {
     private User user;
     @ManyToMany
     private List<User> liked=new ArrayList<>();
-    private java.time.LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
     public Comment() {}
 
