@@ -1,26 +1,28 @@
 package com.fitness_social_media.fitness_social_media.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class Story {
+public class Chat {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @ManyToOne
-    private User user;
-    private String image;
-    private String captions;
+    private String chat_name;
+    private String chat_image;
+    @ManyToMany
+    private List<User> users=new ArrayList<>();
     private LocalDateTime timestamp;
-
 }
