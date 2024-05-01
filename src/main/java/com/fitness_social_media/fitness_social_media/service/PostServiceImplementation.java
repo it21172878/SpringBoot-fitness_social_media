@@ -30,7 +30,9 @@ public class PostServiceImplementation implements PostService{
         Post newPost = new Post();
         
         newPost.setCaption(post.getCaption());
-        newPost.setImage(post.getImage());
+        newPost.setImage1(post.getImage1());
+        newPost.setImage2(post.getImage2());
+        newPost.setImage3(post.getImage3());
         newPost.setCreatedAt(LocalDateTime.now());
         newPost.setVideo(post.getVideo());
         newPost.setUser(user);
