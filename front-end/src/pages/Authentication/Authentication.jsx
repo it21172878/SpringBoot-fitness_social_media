@@ -23,8 +23,8 @@ const Authentication = () => {
                   Connecting Lives, Sharing Stories: Your Social World, Your Way
                 </p>
               </div>
-              {/* <Login /> */}
-              <Register />
+              <Login />
+              {/* <Register /> */}
             </Card>
           </div>
         </Grid>
