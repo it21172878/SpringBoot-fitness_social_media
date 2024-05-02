@@ -30,9 +30,9 @@ const Sidebar = () => {
           <Divider />
           <div className="pl-5 flex items-center justify-between pt-5">
             <div className=" flex items-center space-x-3">
-              <Avatar src="https://www.fanphobia.net/uploads/fun/48316368.jpg" />
+              <Avatar src="https://wallpaperaccess.com/full/2562964.jpg" />
               <div>
-                <p className="font-bold">Dilanka Prasad Liyanagama</p>
+                <p className="font-bold">D.P.Liyanagama</p>
                 <p className="opacity-70">@DPLiyanagama</p>
               </div>
               <Button
