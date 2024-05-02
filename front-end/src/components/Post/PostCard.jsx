@@ -38,7 +38,8 @@ const PostCard = () => {
       <CardMedia
         component="img"
         height="194"
-        image="https://images.pexels.com/photos/821413/pexels-photo-821413.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        // image="https://images.pexels.com/photos/821413/pexels-photo-821413.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        image="https://images.pexels.com/photos/7243182/pexels-photo-7243182.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         alt="Paella dish"
       />
       <CardContent>
