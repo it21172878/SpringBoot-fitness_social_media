@@ -7,8 +7,8 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import ArticleIcon from '@mui/icons-material/Article';
 import PostCard from '../Post/PostCard';
 
-const story = [11, 1, 1, 1, 1];
-const posts = [11, 1, 1, 1, 1];
+const story = [1, 1, 1, 1];
+const posts = [1, 1, 1, 1];
 
 const MiddlePart = () => {
   const handleOpenCreatePostModel = () => {
@@ -62,7 +62,7 @@ const MiddlePart = () => {
         </div>
       </Card>
       <div className="mt-5 space-y-5">
-        {posts.map(() => (
+        {posts.map((item) => (
           <PostCard />
         ))}
       </div>
