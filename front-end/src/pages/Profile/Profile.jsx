@@ -1,7 +1,9 @@
-import { Avatar, Box, Button, Tab, Tabs } from '@mui/material';
+import { Avatar, Box, Button, Card, Tab, Tabs } from '@mui/material';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import PostCard from '../../components/Post/PostCard';
 
+const posts = [1, 1, 1, 1];
 const tabs = [
   {
     value: 'post',
@@ -22,13 +24,13 @@ const tabs = [
 ];
 const Profile = () => {
   const { id } = useParams();
-  const [value, setValue] = React.useState('one');
+  const [value, setValue] = React.useState('post');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   return (
-    <div className="py-10 w-[70%]">
+    <Card className="my-10 w-[70%]">
       <div className="rounded-md">
         <div className="h-[15rem">
           <img
@@ -68,20 +70,35 @@ const Profile = () => {
           </div>
         </div>
         <section>
-          <Box sx={{ width: '100%' }}>
+          <Box sx={{ width: '100%', borderBottom: 1, borderColor: 'divider' }}>
             <Tabs
               value={value}
               onChange={handleChange}
               aria-label="wrapped label tabs example"
             >
               {tabs.map((item) => (
-                <Tab value={item.value} label={item.name} />
+                <Tab value={item.value} label={item.name} wrapped />
               ))}
             </Tabs>
           </Box>
+          <div className="flex justify-center ">
+            {value === 'post' ? (
+              <div className="space-y-5 w-[70%] my-10">
+                {posts.map((item) => (
+                  <div className="border border-slate-100 rounded-md">
+                    <PostCard />
+                  </div>
+                ))}
+              </div>
+            ) : value === 'reels' ? (
+              <div className="flex gap-2"></div>
+            ) : (
+              ''
+            )}
+          </div>
         </section>
       </div>
-    </div>
+    </Card>
   );
 };
 
