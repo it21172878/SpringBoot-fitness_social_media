@@ -4,7 +4,7 @@ import PopularUserCard from './PopularUserCard';
 import { Card } from '@mui/material';
 
 const HomeRight = () => {
-  const popularUser = [1, 1, 1, 1];
+  const popularUser = [11, 1, 1, 1, 1];
   return (
     <div className="pr-5">
       <SearchUser />

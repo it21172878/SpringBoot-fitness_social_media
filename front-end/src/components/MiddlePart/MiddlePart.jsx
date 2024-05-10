@@ -7,8 +7,8 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import ArticleIcon from '@mui/icons-material/Article';
 import PostCard from '../Post/PostCard';
 
-const story = [1, 1, 1, 1];
-const posts = [1, 1, 1, 1];
+const story = [11, 1, 1, 1];
+const posts = [11, 1, 1, 1];
 
 const MiddlePart = () => {
   const handleOpenCreatePostModel = () => {
