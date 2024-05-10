@@ -21,7 +21,7 @@ const HomePage = () => {
         <Grid
           lg={location.pathname === '/' ? 6 : 9}
           item
-          className="px-5 fle justify-center"
+          className=" px-5 flex justify-center"
           xs={12}
         >
           <Routes>

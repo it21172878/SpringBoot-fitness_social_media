@@ -1,7 +1,11 @@
 import React from 'react';
 
 const CreateReelsForm = () => {
-  return <div>CreateReelsForm</div>;
+  return (
+    <div>
+      <h1>CreateReelsForm</h1>
+    </div>
+  );
 };
 
 export default CreateReelsForm;

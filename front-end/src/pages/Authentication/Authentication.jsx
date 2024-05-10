@@ -26,9 +26,9 @@ const Authentication = () => {
               </div>
 
               <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/" element={<Login />}></Route>
+                <Route path="/login" element={<Login />}></Route>
+                <Route path="/register" element={<Register />}></Route>
               </Routes>
             </Card>
           </div>
